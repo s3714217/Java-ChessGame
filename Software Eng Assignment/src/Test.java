@@ -7,8 +7,8 @@ public class Test
 		// TODO Auto-generated method stub
 		Board test = new Board(new Player("p1", "Bob", "White"), new Player("p2", "Fred", "Black"));
 		
-		(test.getSpecPiece(0, 2)).updatePossibleMoves(test);
-		Square[] result = test.getSpecPiece(0, 2).getPossibleMoves();
+		(test.getSpecPiece(0, 0)).updatePossibleMoves(test);
+		Square[] result = test.getSpecPiece(0, 0).getPossibleMoves();
 		
 		for (int i = 0; i < result.length; i++)
 		{

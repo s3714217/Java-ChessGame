@@ -30,10 +30,10 @@ public class Bishop extends Piece
 	
 	public void checkBlockedPath(int xPos, int yPos, Board board, String direction) {
 		
-		if(xPos < 6 && xPos > 0 &&
-				yPos < 6 && yPos > 0 )
+		if(xPos < 6 && xPos >= 0 &&
+				yPos < 6 && yPos >= 0 )
 		{
-			if (board.getSquare(xPos, yPos).getOccupied() != false)
+			if (board.getSquare(xPos, yPos).getOccupied() == false)
 			{
 				if (direction.equals("up-right"))
 				{

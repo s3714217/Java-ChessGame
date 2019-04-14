@@ -21,30 +21,30 @@ public class Board
 		
 		
 		pieces[0] = new Rook(grid[0][0], player1.getColour());
-		pieces[1] = new Bishop(grid[0][1], player1.getColour());
-		pieces[2] = new Knight(grid[0][2], player1.getColour());
-		pieces[3] = new Knight(grid[0][3], player1.getColour());
-		pieces[4] = new Bishop(grid[0][4], player1.getColour());
-		pieces[5] = new Rook(grid[0][5], player1.getColour());
+		pieces[1] = new Bishop(grid[1][0], player1.getColour());
+		pieces[2] = new Knight(grid[2][0], player1.getColour());
+		pieces[3] = new Knight(grid[3][0], player1.getColour());
+		pieces[4] = new Bishop(grid[4][0], player1.getColour());
+		pieces[5] = new Rook(grid[5][0], player1.getColour());
 
-		pieces[6] = new Rook(grid[5][0], player2.getColour());
-		pieces[7] = new Bishop(grid[5][1], player2.getColour());
-		pieces[8] = new Knight(grid[5][2], player2.getColour());
-		pieces[9] = new Knight(grid[5][3], player2.getColour());
-		pieces[10] = new Bishop(grid[5][4], player2.getColour());
+		pieces[6] = new Rook(grid[0][5], player2.getColour());
+		pieces[7] = new Bishop(grid[1][5], player2.getColour());
+		pieces[8] = new Knight(grid[2][5], player2.getColour());
+		pieces[9] = new Knight(grid[3][5], player2.getColour());
+		pieces[10] = new Bishop(grid[4][5], player2.getColour());
 		pieces[11] = new Rook(grid[5][5], player2.getColour());
 		
 		grid[0][0].setOccupied(true);
-		grid[0][1].setOccupied(true);
-		grid[0][2].setOccupied(true);
-		grid[0][3].setOccupied(true);
-		grid[0][4].setOccupied(true);
-		grid[0][5].setOccupied(true);
+		grid[1][0].setOccupied(true);
+		grid[2][0].setOccupied(true);
+		grid[3][0].setOccupied(true);
+		grid[4][0].setOccupied(true);
 		grid[5][0].setOccupied(true);
-		grid[5][1].setOccupied(true);
-		grid[5][2].setOccupied(true);
-		grid[5][3].setOccupied(true);
-		grid[5][4].setOccupied(true);
+		grid[0][5].setOccupied(true);
+		grid[1][5].setOccupied(true);
+		grid[2][5].setOccupied(true);
+		grid[3][5].setOccupied(true);
+		grid[4][5].setOccupied(true);
 		grid[5][5].setOccupied(true);
 	}
 	
