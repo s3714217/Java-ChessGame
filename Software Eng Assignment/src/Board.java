@@ -140,4 +140,13 @@ public class Board
 		players[0].setScore(white);
 		players[1].setScore(black);
 	}
+	
+	public Player getPlayer1()
+	{
+		return players[0];
+	}
+	public Player getPlayer2()
+	{
+		return players[1];
+	}
 }
