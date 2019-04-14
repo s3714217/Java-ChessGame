@@ -138,13 +138,17 @@ public abstract class Piece
 				{
 					for (int j = 0; j < possibleAttacks.length; j++)
 					{
-						if (possibleAttacks[j].getXAxis() == xPos && possibleAttacks[j].getYAxis() == yPos)
+						if (possibleAttacks[j] != null)
 						{
-								
-							board.getSpecPiece(xPos, yPos).killPiece();
-							board.updateScore();
-							break;
+							if (possibleAttacks[j].getXAxis() == xPos && possibleAttacks[j].getYAxis() == yPos)
+							{
+									
+								board.getSpecPiece(xPos, yPos).killPiece();
+								board.updateScore();
+								break;
+							}
 						}
+						
 					}
 					
 					board.getSquare(position.getXAxis(), position.getYAxis()).setOccupied(false);

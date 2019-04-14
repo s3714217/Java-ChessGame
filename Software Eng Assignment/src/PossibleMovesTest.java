@@ -23,6 +23,7 @@ class PossibleMovesTest
 		test.getSpecPiece(2, 0).updatePossibleMoves(test);
 		Square[] result = test.getSpecPiece(2, 0).getPossibleMoves();
 		
+		
 		Assert.assertArrayEquals(expectedMovesList, result);
 	}
 	
@@ -58,4 +59,6 @@ class PossibleMovesTest
 		
 		Assert.assertArrayEquals(expectedMovesList, result);
 	}
+	
+	
 }
