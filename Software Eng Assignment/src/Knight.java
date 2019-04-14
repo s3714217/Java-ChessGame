@@ -9,21 +9,21 @@ public class Knight extends Piece
 	}
 
 	@Override
-	public void updatePossibleMoves(Square[][] grid, Piece[] pieces)
+	public void updatePossibleMoves(Board board)
 	{
 		// TODO Auto-generated method stub
 		super.clearPossibleMoves();
 		super.clearPossibleAttacks();
 		
-		checkPosition(this.getSquare().getXAxis() + 2, this.getSquare().getYAxis() - 1, grid, pieces);
-		checkPosition(this.getSquare().getXAxis() + 2, this.getSquare().getYAxis() + 1, grid, pieces);
-		checkPosition(this.getSquare().getXAxis() - 2, this.getSquare().getYAxis()  - 1, grid, pieces);
-		checkPosition(this.getSquare().getXAxis() - 2, this.getSquare().getYAxis() + 1, grid, pieces);
+		super.checkPosition(this.getSquare().getXAxis() + 2, this.getSquare().getYAxis() - 1, board);
+		super.checkPosition(this.getSquare().getXAxis() + 2, this.getSquare().getYAxis() + 1, board);
+		super.checkPosition(this.getSquare().getXAxis() - 2, this.getSquare().getYAxis()  - 1, board);
+		super.checkPosition(this.getSquare().getXAxis() - 2, this.getSquare().getYAxis() + 1, board);
 		
-		checkPosition(this.getSquare().getXAxis() - 1, this.getSquare().getYAxis() + 2, grid, pieces);
-		checkPosition(this.getSquare().getXAxis() + 1, this.getSquare().getYAxis() + 2, grid, pieces);
-		checkPosition(this.getSquare().getXAxis() - 1, this.getSquare().getYAxis() - 1, grid, pieces);
-		checkPosition(this.getSquare().getXAxis() + 1, this.getSquare().getYAxis() - 1, grid, pieces);
+		super.checkPosition(this.getSquare().getXAxis() - 1, this.getSquare().getYAxis() + 2, board);
+		super.checkPosition(this.getSquare().getXAxis() + 1, this.getSquare().getYAxis() + 2, board);
+		super.checkPosition(this.getSquare().getXAxis() - 1, this.getSquare().getYAxis() - 1, board);
+		super.checkPosition(this.getSquare().getXAxis() + 1, this.getSquare().getYAxis() - 1, board);
 
 	}
 

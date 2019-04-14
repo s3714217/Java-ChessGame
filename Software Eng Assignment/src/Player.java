@@ -1,32 +1,47 @@
 
 public class Player {
 
-    public String Knight;
-    public String Rook;
-    public String Bishop;
+    public String playerId;
+    public int score;
+    public String colour;
+    public String name;
     
-    public void setName(String Knight) {
-        this.Knight = Knight;
+    Player(String playerId, String name, String colour)
+    {
+    	this.playerId = playerId;
+    	this.name = name;
+    	this.colour = colour;
+    	
+    	this.score = 0;		
+    }
+    
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getKnight() {
-        return Knight;
+        return name;
     }
     
-    public void setRook(String Rook) {
-    	this.Rook = Rook;
+    public void setColour(String colour) {
+    	this.colour = colour;
     }
     
-    public String getRook() {
-    	return Rook;
+    public String getColour() {
+    	return colour;
     }
     
-    public void setBishop(String Bishop) {
-    	this.Bishop = Bishop;
+    public String getPlayerId() {
+    	return playerId;
     }
     
-    public String getBishop() {
-    	return Bishop;
+    public int getScore()
+    {
+    	return score;
     }
     
+    public void setScore(int score)
+    {
+    	this.score = score;
+    }
 }

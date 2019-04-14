@@ -59,7 +59,7 @@ public abstract class Piece
 	}
 	
 	// where you need to implement in your piece class
-	abstract void updatePossibleMoves(Square[][] grid, Piece[] pieces);
+	abstract void updatePossibleMoves(Board board);
 	
 	public void addPossibleMoves(Square square)
 	{
@@ -101,45 +101,32 @@ public abstract class Piece
 	}
 	
 	//checks the position if it is a viable pos and check if the position is a attack or not
-	public void checkPosition(int xPos, int yPos, Square[][] grid, Piece[] pieces)
+	public void checkPosition(int xPos, int yPos, Board board)
 	{
 		if (xPos < 6 && xPos >= 0 && yPos < 6 && yPos >= 0)
 		{
-			if (grid[xPos][yPos].getOccupied() == true)
+			if (board.checkOccupied(xPos, yPos) == true)
 			{
 				
-				for (int i = 0; i < pieces.length; i++)
+				if (board.checkPieceTeam(xPos, yPos).equals(team) == false)
 				{
-					if (pieces[i] != null)
-					{
-						if (pieces[i].getSquare().getXAxis() == xPos && pieces[i].getSquare().getYAxis() == yPos )
-						{
-							if (pieces[i].getTeam().contentEquals(team) == false)
-							{
-								
-								addPossibleMoves(grid[xPos][yPos]);
-								addPossibleAttacks(grid[xPos][yPos]);
-								break;
-							}
-						}
-					}
-					
+					addPossibleMoves(board.getSquare(xPos, yPos));
+					addPossibleAttacks(board.getSquare(xPos, yPos));
 				}
-				
 				
 			}
 			else 
 			{
-				addPossibleMoves(grid[xPos][yPos]);
+				addPossibleMoves(board.getSquare(xPos, yPos));
 			}
 		}
 
 	}
 	
 	//moves the pieces checking the positions able to be moved first, and checks the position matches with the possible Moves
-	public void move(int xPos, int yPos, Square[][] grid, Piece[] pieces)
+	public void move(int xPos, int yPos, Board board)
 	{
-		updatePossibleMoves(grid, pieces);
+		updatePossibleMoves(board);
 		
 		for (int i = 0; i < possibleMoves.length; i++)
 		{
@@ -152,23 +139,17 @@ public abstract class Piece
 					{
 						if (possibleAttacks[j].getXAxis() == xPos && possibleAttacks[j].getYAxis() == yPos)
 						{
-							for (int k = 0; k < possibleAttacks.length; k++)
-							{
-								if (pieces[i].getSquare().getXAxis() == xPos && pieces[i].getSquare().getYAxis() == yPos)
-								{
-									
-									pieces[i].killPiece();
-									break;
-								}
-							}
+								
+							board.getSpecPiece(xPos, yPos).killPiece();
+							board.updateScore();
 							break;
 						}
 					}
 					
-					grid[position.getXAxis()][position.getYAxis()].setOccupied(false);
+					board.getSquare(position.getXAxis(), position.getYAxis()).setOccupied(false);
 					
-					grid[xPos][yPos].setOccupied(true);
-					position = grid[xPos][yPos];
+					board.getSquare(xPos, yPos).setOccupied(true);
+					position = board.getSquare(xPos, yPos);
 					
 					break;
 				}

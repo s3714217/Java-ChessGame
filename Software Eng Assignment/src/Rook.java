@@ -9,45 +9,45 @@ public class Rook extends Piece
 	}
 
 	@Override
-	public void updatePossibleMoves(Square[][] grid, Piece[] pieces)
+	public void updatePossibleMoves(Board board)
 	{
 		// TODO Auto-generated method stub
 		super.clearPossibleMoves();
 		super.clearPossibleAttacks();
 		
-		super.checkPosition(this.getSquare().getXAxis() + 1, this.getSquare().getYAxis(), grid, pieces);
-		super.checkPosition(this.getSquare().getXAxis() - 1, this.getSquare().getYAxis(), grid, pieces);
-		super.checkPosition(this.getSquare().getXAxis(), this.getSquare().getYAxis() - 1, grid, pieces);
-		super.checkPosition(this.getSquare().getXAxis(), this.getSquare().getYAxis() + 1, grid, pieces);
+		super.checkPosition(this.getSquare().getXAxis() + 1, this.getSquare().getYAxis(), board);
+		super.checkPosition(this.getSquare().getXAxis() - 1, this.getSquare().getYAxis(), board);
+		super.checkPosition(this.getSquare().getXAxis(), this.getSquare().getYAxis() - 1, board);
+		super.checkPosition(this.getSquare().getXAxis(), this.getSquare().getYAxis() + 1,board);
 		
-		checkBlockedPath(this.getSquare().getXAxis() + 1, this.getSquare().getYAxis(), grid, pieces, "right");
-		checkBlockedPath(this.getSquare().getXAxis() - 1, this.getSquare().getYAxis(), grid, pieces, "left");
-		checkBlockedPath(this.getSquare().getXAxis(), this.getSquare().getYAxis() - 1, grid, pieces, "down");
-		checkBlockedPath(this.getSquare().getXAxis(), this.getSquare().getYAxis() + 1, grid, pieces, "up");
+		checkBlockedPath(this.getSquare().getXAxis() + 1, this.getSquare().getYAxis(), board, "right");
+		checkBlockedPath(this.getSquare().getXAxis() - 1, this.getSquare().getYAxis(), board, "left");
+		checkBlockedPath(this.getSquare().getXAxis(), this.getSquare().getYAxis() - 1, board, "down");
+		checkBlockedPath(this.getSquare().getXAxis(), this.getSquare().getYAxis() + 1, board, "up");
 	}
 	
-	public void checkBlockedPath(int xPos, int yPos, Square[][] grid, Piece[] pieces, String direction) {
+	public void checkBlockedPath(int xPos, int yPos, Board board, String direction) {
 		
 		if(xPos < 6 && xPos > 0 &&
 				yPos < 6 && yPos > 0 )
 		{
-			if (grid[xPos][yPos].getOccupied() != false)
+			if (board.getSquare(xPos, yPos).getOccupied() != false)
 			{
 				if (direction.equals("up"))
 				{
-					super.checkPosition(xPos, yPos + 1, grid, pieces);
+					super.checkPosition(xPos, yPos + 1, board);
 				}
 				if (direction.equals("down"))
 				{
-					super.checkPosition(xPos, yPos - 1, grid, pieces);
+					super.checkPosition(xPos, yPos - 1, board);
 				}
 				if (direction.equals("left"))
 				{
-					super.checkPosition(xPos - 1, yPos, grid, pieces);
+					super.checkPosition(xPos - 1, yPos, board);
 				}
 				if (direction.equals("right"))
 				{
-					super.checkPosition(xPos + 1, yPos, grid, pieces);
+					super.checkPosition(xPos + 1, yPos, board);
 				}
 			}
 			
