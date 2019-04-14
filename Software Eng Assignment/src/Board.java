@@ -17,7 +17,7 @@ public class Board
 		}
 		
 		players[0] = player1;
-		players[2] = player2;
+		players[1] = player2;
 		
 		
 		pieces[0] = new Rook(grid[0][0], player1.getColour());
@@ -34,9 +34,25 @@ public class Board
 		pieces[10] = new Bishop(grid[5][4], player2.getColour());
 		pieces[11] = new Rook(grid[5][5], player2.getColour());
 		
-		
+		grid[0][0].setOccupied(true);
+		grid[0][1].setOccupied(true);
+		grid[0][2].setOccupied(true);
+		grid[0][3].setOccupied(true);
+		grid[0][4].setOccupied(true);
+		grid[0][5].setOccupied(true);
+		grid[5][0].setOccupied(true);
+		grid[5][1].setOccupied(true);
+		grid[5][2].setOccupied(true);
+		grid[5][3].setOccupied(true);
+		grid[5][4].setOccupied(true);
+		grid[5][5].setOccupied(true);
 	}
-
+	
+	public Square[][] getGrid() 
+	{
+		return grid;
+	}
+	
 	public Piece[] getPieces()
 	{
 		return pieces;

@@ -19,7 +19,7 @@ public class Player {
         this.name = name;
     }
 
-    public String getKnight() {
+    public String getName() {
         return name;
     }
     

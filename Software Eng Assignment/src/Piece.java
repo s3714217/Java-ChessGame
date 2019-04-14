@@ -26,6 +26,7 @@ public abstract class Piece
 
 	public Square[] getPossibleMoves()
 	{
+		
 		return possibleMoves;
 	}
 	
@@ -156,5 +157,6 @@ public abstract class Piece
 			}
 		}
 	}
+	
 	
 }
