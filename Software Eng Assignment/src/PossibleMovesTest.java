@@ -60,5 +60,20 @@ class PossibleMovesTest
 		Assert.assertArrayEquals(expectedMovesList, result);
 	}
 	
+	@Test 
+	public void KillTest()
+	{
+       Board test = new Board(new Player("p1", "Bob", "White"), new Player("p2", "Fred", "Black"));
+	   Square[] expectedMovesList = new Square[8];
+	   test.getSpecPiece(0, 0).move(0, 2, test);
+	   // test with Rook
+	   test.getSpecPiece(0, 5).move(0, 4, test);
+	   test.getSpecPiece(0,2).move(0, 4, test);
+	   test.getSpecPiece(0, 
+	   
+	   Assert.assertEquals(test.getSpecPiece(0, 4).getTeam()== test.getPlayer1().getColour());
+	   Assert.assertEquals(test.getPlayer1().getScore() == 5);
+	}
+	
 	
 }
