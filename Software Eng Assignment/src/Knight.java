@@ -9,24 +9,23 @@ public class Knight extends Piece
 	}
 
 	@Override
-	void updatePossibleMoves(Square[][] grid)
+	public void updatePossibleMoves(Square[][] grid, Piece[] pieces)
 	{
 		// TODO Auto-generated method stub
-		for (int i = 0; i < grid.length; i++)
-		{
-			for (int j = 0; j < grid.length; j++)
-			{
-				if (grid[i][j].gets)
-			}
-		}
+		super.clearPossibleMoves();
+		super.clearPossibleAttacks();
+		
+		checkPosition(this.getSquare().getXAxis() + 2, this.getSquare().getYAxis() - 1, grid, pieces);
+		checkPosition(this.getSquare().getXAxis() + 2, this.getSquare().getYAxis() + 1, grid, pieces);
+		checkPosition(this.getSquare().getXAxis() - 2, this.getSquare().getYAxis()  - 1, grid, pieces);
+		checkPosition(this.getSquare().getXAxis() - 2, this.getSquare().getYAxis() + 1, grid, pieces);
+		
+		checkPosition(this.getSquare().getXAxis() - 1, this.getSquare().getYAxis() + 2, grid, pieces);
+		checkPosition(this.getSquare().getXAxis() + 1, this.getSquare().getYAxis() + 2, grid, pieces);
+		checkPosition(this.getSquare().getXAxis() - 1, this.getSquare().getYAxis() - 1, grid, pieces);
+		checkPosition(this.getSquare().getXAxis() + 1, this.getSquare().getYAxis() - 1, grid, pieces);
 
 	}
 
-	@Override
-	void updatePossibleAttacks()
-	{
-		// TODO Auto-generated method stub
-
-	}
 
 }
