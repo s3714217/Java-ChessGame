@@ -82,8 +82,7 @@ public class BoardPanel {
 				start = login.start;
 				player = login.player;
 				JOptionPane.showMessageDialog(null, "Player information updated");
-				JOptionPane.showMessageDialog(null, player[0].getName() + player[1].getName()+ start);
-			}
+				}
 			else
 			{
 				JOptionPane.showMessageDialog(null, "No player information to update");
