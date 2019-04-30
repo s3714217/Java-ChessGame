@@ -1,25 +1,20 @@
 
-public class Board
-{
+public class Board {
 	private Square[][] grid = new Square[6][6];
 	private Piece[] pieces = new Piece[12];
 	private Player[] players = new Player[2];
 
-	public Board(Player player1, Player player2)
-	{
+	public Board(Player player1, Player player2) {
 		// TODO Auto-generated constructor stub
-		for (int i = 0; i < 6; i++)
-		{
-			for (int j = 0; j < 6; j++)
-			{
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 6; j++) {
 				grid[i][j] = new Square(i, j);
 			}
 		}
-		
+
 		players[0] = player1;
 		players[1] = player2;
-		
-		
+
 		pieces[0] = new Rook(grid[0][0], player1.getColour());
 		pieces[1] = new Bishop(grid[1][0], player1.getColour());
 		pieces[2] = new Knight(grid[2][0], player1.getColour());
@@ -33,7 +28,7 @@ public class Board
 		pieces[9] = new Knight(grid[3][5], player2.getColour());
 		pieces[10] = new Bishop(grid[4][5], player2.getColour());
 		pieces[11] = new Rook(grid[5][5], player2.getColour());
-		
+
 		grid[0][0].setOccupied(true);
 		grid[1][0].setOccupied(true);
 		grid[2][0].setOccupied(true);
@@ -47,27 +42,20 @@ public class Board
 		grid[4][5].setOccupied(true);
 		grid[5][5].setOccupied(true);
 	}
-	
-	public Square[][] getGrid() 
-	{
+
+	public Square[][] getGrid() {
 		return grid;
 	}
-	
-	public Piece[] getPieces()
-	{
+
+	public Piece[] getPieces() {
 		return pieces;
 	}
 
-	public Piece getSpecPiece(int xPos, int yPos)
-	{
-		if (xPos < 6 && xPos >= 0 && yPos < 6 && yPos >= 0)
-		{
-			if (grid[xPos][yPos].getOccupied() == true)
-			{
-				for (int i = 0; i < pieces.length; i++)
-				{
-					if (pieces[i].getSquare() == grid[xPos][yPos])
-					{
+	public Piece getSpecPiece(int xPos, int yPos) {
+		if (xPos < 6 && xPos >= 0 && yPos < 6 && yPos >= 0) {
+			if (grid[xPos][yPos].getOccupied() == true) {
+				for (int i = 0; i < pieces.length; i++) {
+					if (pieces[i].getSquare() == grid[xPos][yPos]) {
 						return pieces[i];
 					}
 				}
@@ -76,77 +64,61 @@ public class Board
 		return null;
 	}
 
-	public Square getSquare(int xPos, int yPos)
-	{
-		if (xPos < 6 && xPos >= 0 && yPos < 6 && yPos >= 0)
-		{
+	public Square getSquare(int xPos, int yPos) {
+		if (xPos < 6 && xPos >= 0 && yPos < 6 && yPos >= 0) {
 
 			return grid[xPos][yPos];
 		}
-		
+
 		return null;
 	}
-	
-	public boolean checkOccupied(int xPos, int yPos)
-	{
-		if (xPos < 6 && xPos >= 0 && yPos < 6 && yPos >= 0)
-		{
-			if (grid[xPos][yPos].getOccupied() == true)
-			{
-				
+
+	public boolean checkOccupied(int xPos, int yPos) {
+		if (xPos < 6 && xPos >= 0 && yPos < 6 && yPos >= 0) {
+			if (grid[xPos][yPos].getOccupied() == true) {
+
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
-	
-	public String checkPieceTeam(int xPos, int yPos) 
-	{
-		if (xPos < 6 && xPos >= 0 && yPos < 6 && yPos >= 0)
-		{
-			if (grid[xPos][yPos].getOccupied() == true)
-			{
-				for (int i = 0; i < pieces.length; i++)
-				{
-					if (pieces[i].getSquare() == grid[xPos][yPos])
-					{
+
+	public String checkPieceTeam(int xPos, int yPos) {
+		if (xPos < 6 && xPos >= 0 && yPos < 6 && yPos >= 0) {
+			if (grid[xPos][yPos].getOccupied() == true) {
+				for (int i = 0; i < pieces.length; i++) {
+					if (pieces[i].getSquare() == grid[xPos][yPos]) {
 						return pieces[i].getTeam();
 					}
 				}
 			}
 		}
-		
+
 		return null;
 	}
-	
-	public void updateScore () 
-	{
+
+	public void updateScore() {
 		int white = 0;
 		int black = 0;
-		
-		for (int i = 0; i < pieces.length; i++)
-		{
-			if (pieces[i].getTeam() == players[0].getColour() && pieces[i].getAliveStatus() == false)
-			{
+
+		for (int i = 0; i < pieces.length; i++) {
+			if (pieces[i].getTeam() == players[0].getColour() && pieces[i].getAliveStatus() == false) {
 				black += 5;
-			}
-			else if (pieces[i].getTeam() == players[1].getColour() && pieces[i].getAliveStatus() == false)
-			{
+			} else if (pieces[i].getTeam() == players[1].getColour() && pieces[i].getAliveStatus() == false) {
 				white += 5;
 			}
 		}
-		
+
 		players[0].setScore(white);
 		players[1].setScore(black);
 	}
-	
-	public Player getPlayer1()
-	{
+
+	public Player getPlayer1() {
 		return players[0];
 	}
-	public Player getPlayer2()
-	{
+
+	public Player getPlayer2() {
 		return players[1];
 	}
 }
