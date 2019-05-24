@@ -7,10 +7,9 @@ public class Player {
 	private String name;
 	private String pass;
 
-	Player(String playerId, String name, String colour, String pass) {
+	Player(String playerId, String name, String pass) {
 		this.playerId = playerId;
 		this.name = name;
-		this.colour = colour;
 		this.pass = pass;
 		this.score = 0;
 	}
@@ -23,9 +22,6 @@ public class Player {
 		return name;
 	}
 
-	public void setColour(String colour) {
-		this.colour = colour;
-	}
 
 	public String getColour() {
 		return colour;

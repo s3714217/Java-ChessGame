@@ -4,6 +4,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
@@ -12,17 +13,18 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
 
-public class LoginPanel  {
+public class RegisterPanel  {
 
 	private JFrame frame;
-	Player[] player = new Player[2];
+	//Player[] player = new Player[2];
 	boolean start = false;
 	int num_player = 0;
+	File file = new File("../Software Eng Assignment/player_map/players.txt");
 
-	public LoginPanel(Board board) {
+	public RegisterPanel(Board board) {
 		initialize(board);
 	}
 
@@ -69,12 +71,12 @@ public class LoginPanel  {
 		pass_label.setBounds(69, 86, 59, 16);
 		center_panel.add(pass_label);
 		
-		JButton login = new JButton("Log in");
-		login.setBounds(72, 119, 83, 29);
-		center_panel.add(login);
+		JButton register = new JButton("Register");
+		register.setBounds(72, 119, 83, 29);
+		center_panel.add(register);
 						
-		JLabel main_label = new JLabel("PLAYER LOG IN");
-		main_label.setBounds(109, 24, 94, 16);
+		JLabel main_label = new JLabel("PLAYER REGISTER");
+		main_label.setBounds(109, 24, 150, 16);
 		center_panel.add(main_label);
 	
 		JButton close = new JButton("Close");
@@ -89,36 +91,45 @@ public class LoginPanel  {
 			}
 		});
 				
-			/*	login.addMouseListener(new MouseAdapter() {
+				register.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						String pass = passwordField.getText();
 						String use = textField.getText();
 						
-						FileReader file;
+						if(pass.length() <= 3)
+						{
+							JOptionPane.showMessageDialog(null, "Your Password must be more than 3 characters");
+						}
+						else if(use.length()<= 3)
+						{
+							JOptionPane.showMessageDialog(null, "Your Username must be more than 3 characters");
+						}
+						else if(pass.length() >= 3 && use.length() >=3)
+						{
 						try {
-							file = new FileReader("../Software Eng Assignment/player_map/players.txt");
-							BufferedReader fl = new BufferedReader(file, 50);
-							String c;
-							 while ((c = fl.readLine()) != null) {
-						            System.out.println(c);
-						         }       
-						} catch (FileNotFoundException e2) {
+							 FileWriter writer = new FileWriter(file,true); 
+						      writer.append("\n"+use+"\n" +pass);
+						      writer.flush();
+						      writer.close();
+							}
+						 catch (FileNotFoundException e1) {
 							// TODO Auto-generated catch block
-							e2.printStackTrace();
-						} catch (IOException e1) {
+							e1.printStackTrace();}
+						  catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
+						
+						}
+						
+						else {JOptionPane.showMessageDialog(null, "Your Username and Password should not be blank");}
+					}});
 					
-					
-					
-					}});*/
-					
-
 	}
 	public JFrame getPanel()
 	{
 		return frame;
 	}
 }
+
