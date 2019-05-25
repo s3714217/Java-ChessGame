@@ -38,7 +38,7 @@ public class BoardPanel {
 	}
 
 	public BoardPanel() {
-		Board board = null;
+		Board board = new Board();
 		initialize(board);
 	}
 
@@ -93,7 +93,18 @@ public class BoardPanel {
 		start.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				chess_board.getPanel().setVisible(true);
+				//chess_board.getPanel().setVisible(true);
+				if (login_panel.loggedPlayer[0] != null && login_panel.loggedPlayer[1] != null)
+				{	
+					
+					board.addPlayer(login_panel.loggedPlayer);
+					JOptionPane.showMessageDialog(null, "Welcome to LATTITUDE CHESS GAME");
+					chess_board.getPanel().setVisible(true);
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Not enough player to start the game!");
+				}
 			}
 		});
 		
@@ -104,33 +115,6 @@ public class BoardPanel {
 			}
 		});
 
-		
-	/*	JButton btnNewButton_2 = new JButton("Update player info");
-		comboBox.add(btnNewButton_2);
-		btnNewButton_2.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			if(login.player[0] != null | login.player[1] != null)
-			{
-				start = login.start;
-				player = login.player;
-				JOptionPane.showMessageDialog(null, "Player information updated");
-			}
-			else
-			{
-				JOptionPane.showMessageDialog(null, "No player information to update");
-			}
-			}
-		});
-		btnNewButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				login.getPanel().setVisible(true);
-			}
-		});*/
-		
-	
-	
 	}
 	
 }

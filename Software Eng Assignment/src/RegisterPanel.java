@@ -11,10 +11,16 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Properties;
 
 public class RegisterPanel  {
 
@@ -31,6 +37,8 @@ public class RegisterPanel  {
 	
 
 	private void initialize(Board board) {
+		
+		Map<String,String> player = new HashMap<String,String>();
 		
 		frame = new JFrame();
 		frame.setResizable(false);
@@ -72,7 +80,7 @@ public class RegisterPanel  {
 		center_panel.add(pass_label);
 		
 		JButton register = new JButton("Register");
-		register.setBounds(72, 119, 83, 29);
+		register.setBounds(69, 119, 83, 29);
 		center_panel.add(register);
 						
 		JLabel main_label = new JLabel("PLAYER REGISTER");
@@ -81,8 +89,9 @@ public class RegisterPanel  {
 	
 		JButton close = new JButton("Close");
 		
-		close.setBounds(158, 119, 79, 29);
+		close.setBounds(163, 119, 79, 29);
 		center_panel.add(close);
+		
 		
 				close.addMouseListener(new MouseAdapter() {
 			@Override
@@ -96,34 +105,44 @@ public class RegisterPanel  {
 					public void mouseClicked(MouseEvent e) {
 						String pass = passwordField.getText();
 						String use = textField.getText();
+						Properties properties = new Properties();
 						
-						if(pass.length() <= 3)
-						{
-							JOptionPane.showMessageDialog(null, "Your Password must be more than 3 characters");
-						}
-						else if(use.length()<= 3)
-						{
-							JOptionPane.showMessageDialog(null, "Your Username must be more than 3 characters");
-						}
-						else if(pass.length() >= 3 && use.length() >=3)
-						{
 						try {
-							 FileWriter writer = new FileWriter(file,true); 
-						      writer.append("\n"+use+"\n" +pass);
-						      writer.flush();
-						      writer.close();
+							properties.load(new FileInputStream("../Software Eng Assignment/player_map/data.properties"));
+						} catch (IOException e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
+						}
+
+						for (String key : properties.stringPropertyNames()) {
+						   player.put(key, properties.get(key).toString());
+						} 
+						
+						
+						if(use.length()<= 3 || pass.length() <=3)
+						{
+							JOptionPane.showMessageDialog(null, "Your Username and Password must be more than 3 characters");
+						}
+						
+						else if(player.get(use) != null)
+						{
+							JOptionPane.showMessageDialog(null, "Player has already been registered");
+						}
+						else
+						{
+							player.put(use, pass);
+							for (Map.Entry<String, String> entry : player.entrySet()) {properties.put(use, pass);}
+
+							try {
+								properties.store(new FileOutputStream("../Software Eng Assignment/player_map/data.properties"), null);
+							} catch (IOException e1) {
+								e1.printStackTrace();
 							}
-						 catch (FileNotFoundException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();}
-						  catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+						textField.setText("");
+						passwordField.setText("");
 						}
+				
 						
-						}
-						
-						else {JOptionPane.showMessageDialog(null, "Your Username and Password should not be blank");}
 					}});
 					
 	}

@@ -17,7 +17,10 @@ public class Player {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	public void setColor(String colour)
+	{
+		this.colour = colour;
+	}
 	public String getName() {
 		return name;
 	}

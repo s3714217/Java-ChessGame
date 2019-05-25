@@ -4,23 +4,32 @@ import javax.swing.JPasswordField;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 public class LoginPanel  {
 
 	private JFrame frame;
-	Player[] player = new Player[2];
+	Map<String, String>player = new HashMap<String, String>();
 	boolean start = false;
 	int num_player = 0;
+	Player[] loggedPlayer = new Player[2];
+
+
+	
 
 	public LoginPanel(Board board) {
 		initialize(board);
@@ -29,7 +38,8 @@ public class LoginPanel  {
 	
 
 	private void initialize(Board board) {
-		
+
+
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 300, 300);
@@ -89,31 +99,63 @@ public class LoginPanel  {
 			}
 		});
 				
-			/*	login.addMouseListener(new MouseAdapter() {
+				login.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						String pass = passwordField.getText();
 						String use = textField.getText();
+						Properties properties = new Properties();
 						
-						FileReader file;
 						try {
-							file = new FileReader("../Software Eng Assignment/player_map/players.txt");
-							BufferedReader fl = new BufferedReader(file, 50);
-							String c;
-							 while ((c = fl.readLine()) != null) {
-						            System.out.println(c);
-						         }       
-						} catch (FileNotFoundException e2) {
+							properties.load(new FileInputStream("../Software Eng Assignment/player_map/data.properties"));
+						} catch (IOException e2) {
 							// TODO Auto-generated catch block
 							e2.printStackTrace();
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
 						}
-					
-					
-					
-					}});*/
+
+						for (String key : properties.stringPropertyNames()) {
+						   player.put(key, properties.get(key).toString());
+						} 
+						
+						if(player.get(use) != null) {
+							
+							if (loggedPlayer[1] != null)
+							{
+								JOptionPane.showMessageDialog(null, "The game is full");
+							}
+							else
+							{
+							if(player.get(use).equals(pass)  == true)
+							{
+								if(loggedPlayer[0] == null)
+								{
+									String ID = JOptionPane.showInputDialog("Pleas enter your ID");
+									loggedPlayer[0] = new Player(ID, use, pass);
+									JOptionPane.showMessageDialog(null, "Welcome " + loggedPlayer[0].getName());
+								}
+								else if (loggedPlayer[1] == null)
+								{
+									String ID = JOptionPane.showInputDialog("Pleas enter your ID");
+									loggedPlayer[1] = new Player(ID, use, pass);
+									JOptionPane.showMessageDialog(null, "Welcome " + loggedPlayer[1].getName());
+									//board.addPlayer(loggedPlayer);
+									//JOptionPane.showMessageDialog(null, board.getPlayer());
+								}
+							}
+							else
+							{
+								JOptionPane.showMessageDialog(null, "Wrong password");
+							}
+								
+							}
+						
+						}
+						else{JOptionPane.showMessageDialog(null, "Wrong username");}
+						textField.setText("");
+						passwordField.setText("");
+					}});
+				
+			
 					
 
 	}
