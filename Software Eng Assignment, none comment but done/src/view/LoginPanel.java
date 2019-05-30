@@ -23,10 +23,10 @@ import java.util.Properties;
 public class LoginPanel  {
 
 	private JFrame frame;
-	Map<String, String>player = new HashMap<String, String>();
-	boolean start = false;
-	int num_player = 0;
-	Player[] loggedPlayer = new Player[2];
+	private Map<String, String>player = new HashMap<String, String>();
+	private boolean start = false;
+	private int num_player = 0;
+	private Player[] loggedPlayer = new Player[2];
 
 
 	
@@ -39,7 +39,7 @@ public class LoginPanel  {
 
 	private void initialize() {
 
-
+		//initialize the GUI
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 300, 300);
@@ -98,7 +98,7 @@ public class LoginPanel  {
 				frame.setVisible(false);
 			}
 		});
-				
+				//login function
 				login.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
@@ -107,16 +107,17 @@ public class LoginPanel  {
 						Properties properties = new Properties();
 						
 						try {
+							//loading database
 							properties.load(new FileInputStream("../Software Eng Assignment/player_map/data.properties"));
 						} catch (IOException e2) {
 							// TODO Auto-generated catch block
 							e2.printStackTrace();
 						}
-
+							//initializing user map
 						for (String key : properties.stringPropertyNames()) {
 						   player.put(key, properties.get(key).toString());
 						} 
-						
+							//validating user
 						if(player.get(use) != null) 
 						{
 							
@@ -127,7 +128,7 @@ public class LoginPanel  {
 							else
 							{
 								if(player.get(use).equals(pass)  == true)
-								{
+								{	//player 1 logged in
 									if(loggedPlayer[0] == null)
 									{
 										loggedPlayer[0] = new Player(use, pass);
@@ -135,7 +136,7 @@ public class LoginPanel  {
 										frame.dispose();
 									}
 									else if (loggedPlayer[1] == null && !use.equals(loggedPlayer[0].getName()))
-									{
+									{	//player 2 logged in
 										loggedPlayer[1] = new Player(use, pass);
 										JOptionPane.showMessageDialog(null, "Welcome " + loggedPlayer[1].getName());
 	
@@ -153,7 +154,6 @@ public class LoginPanel  {
 								}
 								
 							}
-						
 						}
 						else{JOptionPane.showMessageDialog(null, "The username does not exist");}
 						textField.setText("");
@@ -163,6 +163,10 @@ public class LoginPanel  {
 			
 					
 
+	}
+	public Player[] getLoggedPlayer()
+	{
+		return this.loggedPlayer;
 	}
 	public JFrame getPanel()
 	{

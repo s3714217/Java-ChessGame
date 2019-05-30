@@ -27,7 +27,7 @@ public class Menu
 
 	private void initialize(Board board)
 	{
-
+		//initialize the GUI
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setResizable(false);
@@ -43,12 +43,12 @@ public class Menu
 		register.setBounds(171, 125, 111, 37);
 		center_panel.add(register);
 
-		JButton login = new JButton("Log In");
+		JButton login = new JButton("Log In"); 
 
 		login.setBounds(171, 174, 107, 37);
 		center_panel.add(login);
 
-		JButton start = new JButton("Start Game");
+		JButton start = new JButton("Start Game"); //Accessing ChessGUI
 
 		start.setBounds(171, 223, 107, 37);
 		center_panel.add(start);
@@ -56,7 +56,7 @@ public class Menu
 		ImageIcon title = new ImageIcon("../Software Eng Assignment/img/Title.jpg");
 		JLabel titleLabel = new JLabel("Title");
 		titleLabel.setIcon(new ImageIcon(
-				title.getImage().getScaledInstance(frame.getWidth(), 100, title.getImage().SCALE_SMOOTH)));
+		title.getImage().getScaledInstance(frame.getWidth(), 100, title.getImage().SCALE_SMOOTH)));
 		titleLabel.setSize(frame.getWidth(), titleLabel.getHeight());
 		titleLabel.setBounds(0, 0, 450, 102);
 		center_panel.add(titleLabel);
@@ -67,23 +67,23 @@ public class Menu
 		login.addMouseListener(new MouseAdapter()
 		{
 			@Override
-			public void mouseClicked(MouseEvent e)
+			public void mouseClicked(MouseEvent e)//Accessing login window
 			{
 				login_panel.getPanel().setVisible(true);
 			}
 		});
 
-		start.addMouseListener(new MouseAdapter()
+		start.addMouseListener(new MouseAdapter()//Getting 2 logged in player and start ChessGUI
 		{
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
 
-				if (login_panel.loggedPlayer[0] != null && login_panel.loggedPlayer[1] != null)
+				if (login_panel.getLoggedPlayer()[0] != null && login_panel.getLoggedPlayer()[1] != null)
 				{
-
-					board.addPlayer(login_panel.loggedPlayer[0]);
-					board.addPlayer(login_panel.loggedPlayer[1]);
+					
+					board.addPlayer(login_panel.getLoggedPlayer()[0]);
+					board.addPlayer(login_panel.getLoggedPlayer()[1]);
 
 					MoveAmount moveEnter = new MoveAmount(frame, board);
 
@@ -100,7 +100,7 @@ public class Menu
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
-				register_panel.getPanel().setVisible(true);
+				register_panel.getPanel().setVisible(true);//Acessing register window
 			}
 		});
 

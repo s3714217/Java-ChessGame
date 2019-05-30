@@ -27,10 +27,7 @@ import java.util.Properties;
 public class RegisterPanel  {
 
 	private JFrame frame;
-	//Player[] player = new Player[2];
-	boolean start = false;
-	int num_player = 0;
-	File file = new File("../Software Eng Assignment/player_map/players.txt");
+	private File file = new File("../Software Eng Assignment/player_map/players.txt");
 
 	public RegisterPanel() {
 		initialize();
@@ -41,7 +38,7 @@ public class RegisterPanel  {
 	private void initialize() {
 		
 		Map<String,String> player = new HashMap<String,String>();
-		
+		//Initialize the GUI
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 300, 300);
@@ -101,15 +98,16 @@ public class RegisterPanel  {
 				frame.setVisible(false);
 			}
 		});
-				
+				//validating input
 				register.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						String pass = passwordField.getText();
+						String pass = passwordField.getText(); 
 						String use = textField.getText();
 						Properties properties = new Properties();
 						
 						try {
+							//loading database
 							properties.load(new FileInputStream("player_map/data.properties"));
 						} catch (IOException e2) {
 							// TODO Auto-generated catch block
@@ -120,7 +118,7 @@ public class RegisterPanel  {
 						   player.put(key, properties.get(key).toString());
 						} 
 						
-						
+						//user name and password must be at least 3 characters
 						if(use.length()<= 3 || pass.length() <=3)
 						{
 							JOptionPane.showMessageDialog(null, "Your Username and Password must be more than 3 characters");
@@ -131,7 +129,7 @@ public class RegisterPanel  {
 							JOptionPane.showMessageDialog(null, "Player has already been registered");
 						}
 						else
-						{
+						{	//submit player to database
 							player.put(use, pass);
 							for (Map.Entry<String, String> entry : player.entrySet()) {properties.put(use, pass);}
 
@@ -151,6 +149,8 @@ public class RegisterPanel  {
 					}});
 					
 	}
+	
+	
 	public JFrame getPanel()
 	{
 		return frame;
