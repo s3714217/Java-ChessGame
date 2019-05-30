@@ -12,6 +12,7 @@ import javax.swing.border.Border;
 import oo.Board;
 import oo.Player;
 
+// the status bar for the chessGUI
 public class StatusBar extends JPanel implements MoveObserver
 {
 	private JLabel currentPlayerTurn;
@@ -22,8 +23,6 @@ public class StatusBar extends JPanel implements MoveObserver
 	public StatusBar(Board board)
 	{
 		// TODO Auto-generated constructor stub
-			
-//		board.addMoveObserver(this);
 		
 		updateBoard(board);
 		
@@ -36,29 +35,12 @@ public class StatusBar extends JPanel implements MoveObserver
 		validate();
 	}
 
-	public StatusBar(LayoutManager arg0)
-	{
-		super(arg0);
-		// TODO Auto-generated constructor stub
-	}
-
-	public StatusBar(boolean arg0)
-	{
-		super(arg0);
-		// TODO Auto-generated constructor stub
-	}
-
-	public StatusBar(LayoutManager arg0, boolean arg1)
-	{
-		super(arg0, arg1);
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public void updateBoard(Board board)
 	{
 		// TODO Auto-generated method stub
 		
+		// removing past information
 		if(currentPlayerTurn != null)
 		{
 			remove(currentPlayerTurn);
@@ -67,10 +49,11 @@ public class StatusBar extends JPanel implements MoveObserver
 			remove(turnsLeft);
 		}
 
-		
+		// geting the new player scores
 		Player p1 = board.getPlayer1();
 		Player p2 = board.getPlayer2();
 		
+		// getting the current players turn
 		if (board.getCurrentPlayerInt() == 0)
 		{
 			currentPlayerTurn = new JLabel("Current Player: " + board.getCurrentPlayer().getName() + " (white)",
@@ -84,6 +67,8 @@ public class StatusBar extends JPanel implements MoveObserver
 
 		player1Score = new JLabel(p1.getName() + "'s Score: " + p1.getScore(), SwingConstants.CENTER);
 		player2Score = new JLabel(p2.getName() + "'s Score: " + p2.getScore(), SwingConstants.CENTER);
+		
+		// getting the turns left
 		turnsLeft = new JLabel("Moves Left: " + board.getNumMoves(),
 				SwingConstants.RIGHT);
 		
@@ -94,6 +79,7 @@ public class StatusBar extends JPanel implements MoveObserver
 		player2Score.setBorder(border);
 		turnsLeft.setBorder(border);
 		
+		// adding the info back into the status bar
 		add(currentPlayerTurn);
 		add(player1Score);
 		add(player2Score);

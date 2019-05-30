@@ -30,8 +30,10 @@ public class SelectListener implements MouseListener
 		// TODO Auto-generated method stub
 		Piece gotPiece = board.getSpecPiece(xPos, yPos);
 		
+		// making sure that the position selected has a piece
 		if (gotPiece != null)
 		{
+			// making sure the piece selected is from the same team
 			if (board.getCurrentPlayerInt() == 0 && gotPiece.getTeam().equals("player1"))
 			{
 				board.pieceSelected(xPos, yPos);

@@ -37,6 +37,7 @@ public class MoveListener implements MouseListener
 		
 		boolean isMove = false;
 		
+		// check if target position exist
 		for (int i = 0; i < possibleMoves.length; i++)
 		{
 			if (possibleMoves[i] != null)
@@ -48,6 +49,7 @@ public class MoveListener implements MouseListener
 			}
 		}
 		
+		// if is a possible move move the piece
 		if (isMove == true)
 		{
 			board.move(xPos, yPos, tarXPos, tarYPos);

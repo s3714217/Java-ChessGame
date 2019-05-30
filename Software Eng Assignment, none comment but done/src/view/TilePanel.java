@@ -22,13 +22,16 @@ import oo.Piece;
 import oo.Rook;
 import oo.Square;
 
+// panel that represents a square on the board
 public class TilePanel extends JPanel implements BoardObserver, MoveObserver
 {
-	
+	// the position it represents
 	private int xPos;
 	private int yPos;
 	
+	//image of the piece
 	private JLabel imageLabel = null;
+	
 	private MouseListener currentListener;
 	
 	public TilePanel(int xPos, int yPos, CenterPanel center, Board board)
@@ -51,6 +54,7 @@ public class TilePanel extends JPanel implements BoardObserver, MoveObserver
 		validate();
 	}
 	
+	// initializing the tile colours
 	public void intialiseTileColour()
 	{
 		Color lightTile = Color.decode("#FFEACE");
@@ -81,6 +85,7 @@ public class TilePanel extends JPanel implements BoardObserver, MoveObserver
 		
 	}
 	
+	// setting the tile to specific colour
 	public void setColour(Color colour)
 	{
 		setBackground(colour);
@@ -89,14 +94,12 @@ public class TilePanel extends JPanel implements BoardObserver, MoveObserver
 		repaint();
 	}
 	
+	// setting the image for the tile
 	public void setImage(String string) throws IOException
 	{
 		BufferedImage image = ImageIO.read(new File(string));
 		
 		ImageIcon img = new ImageIcon(image);
-//		Image resizeImg= img.getImage();
-//		Image newImg = resizeImg.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
-//		img = new ImageIcon(newImg);
 		
 		imageLabel = new JLabel(img);
 		 
@@ -111,6 +114,7 @@ public class TilePanel extends JPanel implements BoardObserver, MoveObserver
 	{
 		// TODO Auto-generated method stub
 		
+		// if image exist remove
 		if (imageLabel != null)
 		{
 			this.remove(imageLabel);
@@ -118,6 +122,7 @@ public class TilePanel extends JPanel implements BoardObserver, MoveObserver
 			imageLabel = null;
 		}
 		
+		// checking if a piece exist in the square
 		Piece gotPiece = board.getSpecPiece(xPos, yPos);
 		String file = "Pieces/Chess_";
 		
@@ -154,6 +159,8 @@ public class TilePanel extends JPanel implements BoardObserver, MoveObserver
 				}
 			}
 			file += ".png";
+			
+			// trying to add the piece if it does exist
 			try
 			{
 				setImage(file);
@@ -164,6 +171,7 @@ public class TilePanel extends JPanel implements BoardObserver, MoveObserver
 			}		
 		}
 		
+		//setting mouse listener to SelectListener
 		deselected(board);
 		
 		revalidate();
@@ -177,11 +185,13 @@ public class TilePanel extends JPanel implements BoardObserver, MoveObserver
 		
 		Square[] possibleMoves = board.getSpecPiece(xPos, yPos).getPossibleMoves();
 		
+		// changing mouse listener
 		this.removeMouseListener(currentListener);
 		
 		currentListener = new MoveListener(xPos, yPos, this.xPos, this.yPos, board);
 		this.addMouseListener(currentListener);
 		
+		// making the tiles that are movable too red
 		for (int i = 0; i < possibleMoves.length; i++)
 		{
 			if (possibleMoves[i] != null)
@@ -196,6 +206,7 @@ public class TilePanel extends JPanel implements BoardObserver, MoveObserver
 			
 		}
 		
+		// making the tile selected blue
 		if (this.xPos == xPos && this.yPos == yPos)
 		{
 			setColour(Color.decode("#6EC2F9"));
@@ -213,6 +224,8 @@ public class TilePanel extends JPanel implements BoardObserver, MoveObserver
 	public void deselected(Board board)
 	{
 		// TODO Auto-generated method stub
+		
+		// making the mouse listener SelectListener
 		this.removeMouseListener(currentListener);
 		
 		currentListener = new SelectListener(xPos, yPos, board);

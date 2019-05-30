@@ -14,9 +14,10 @@ import javax.swing.JTextField;
 
 import oo.Board;
 
+// for entering the amount of moves wanted
 public class MoveAmount extends JFrame
 {
-
+	
 	private int numMoves = 0;	
 	private JLabel header;
 	private JTextField inputNumMoves;
@@ -43,7 +44,7 @@ public class MoveAmount extends JFrame
 		content.setLayout(null);
 		header = new JLabel("Enter the amount of moves wanted");
 		header.setBounds(75, 3, 250, 40);
-//		header.setFont(new Font("Sans-serif", Font.BOLD, 15));
+
 		
 		labelNumMoves = new JLabel("Amount:");
 		labelNumMoves.setBounds(20, 30, 250, 30);
@@ -59,6 +60,7 @@ public class MoveAmount extends JFrame
 		add(inputNumMoves);
 		add(submit);
 		
+		// submit action
 		submit.addActionListener(new ActionListener() 
 				{
 
@@ -66,13 +68,17 @@ public class MoveAmount extends JFrame
 					public void actionPerformed(ActionEvent arg0)
 					{
 						// TODO Auto-generated method stub
+						// checks the length of the string entered
 						if (inputNumMoves.getText().length() > 0)
 						{
+							// trys to get turn string into int
 							try 
 							{
 								
+								// check the number entered is bigger than 0
 								if (Integer.parseInt(inputNumMoves.getText()) > 0)
 								{
+									// create the chessGUI
 									numMoves = Integer.parseInt(inputNumMoves.getText());
 									setVisible(false);
 									

@@ -10,21 +10,35 @@ import view.MoveObserver;
 
 public class Board
 {
+	//grid for the squares
 	private Square[][] grid = new Square[6][6];
+	
+	// all the pieces on the board
 	private Piece[] pieces = new Piece[12];
+	
+	// players in the game
 	private Player[] players = new Player[2];
+	
+	// a int to represent whos turn it is
 	private int currentPlayer = 0;
+	
+	// the number of moves left
 	private int numMoves = 0;
 	
+	// collection of observers for GUI
+	// used for Tiles to update when selecting a tile
 	private final Collection<BoardObserver> boardObservers;
+	
+	// used for updating when a player has finished there turn
 	private final Collection<MoveObserver> moveObservers;
+	
+	// observers for ending when game is ended
 	private final Collection<EndObserver> endObservers;
 	
-//	private HashMap<String, Player> registeredPlayers = new HashMap<>();
 	
 	public Board(Player player1, Player player2)
 	{
-		// TODO Auto-generated constructor stub
+		//initializing the observer arrayList
 		this.boardObservers = new ArrayList<>();
 		this.moveObservers = new ArrayList<>();
 		this.endObservers = new ArrayList<>();
@@ -37,16 +51,19 @@ public class Board
 			}
 		}
 		
+		
 		players[0] = player1;
 		players[1] = player2;
 		
+		// pieces for player 1/ white
 		pieces[0] = new Rook(grid[0][0], "player1");
 		pieces[1] = new Bishop(grid[1][0], "player1");
 		pieces[2] = new Knight(grid[2][0], "player1");
 		pieces[3] = new Knight(grid[3][0], "player1");
 		pieces[4] = new Bishop(grid[4][0], "player1");
 		pieces[5] = new Rook(grid[5][0], "player1");
-
+		
+		// pieces for player 2/ black
 		pieces[6] = new Rook(grid[0][5], "player2");
 		pieces[7] = new Bishop(grid[1][5], "player2");
 		pieces[8] = new Knight(grid[2][5], "player2");
@@ -54,6 +71,7 @@ public class Board
 		pieces[10] = new Bishop(grid[4][5], "player2");
 		pieces[11] = new Rook(grid[5][5], "player2");
 		
+		// setting the square with pieces 
 		grid[0][0].setOccupied(true);
 		grid[1][0].setOccupied(true);
 		grid[2][0].setOccupied(true);
@@ -70,7 +88,7 @@ public class Board
 	
 	public Board()
 	{
-		// TODO Auto-generated constructor stub
+		
 		this(null, null);
 	}
 	
@@ -94,6 +112,7 @@ public class Board
 		return numMoves;
 	}
 
+	// get specific piece at the position
 	public Piece getSpecPiece(int xPos, int yPos)
 	{
 		if (xPos < 6 && xPos >= 0 && yPos < 6 && yPos >= 0)
@@ -112,6 +131,7 @@ public class Board
 		return null;
 	}
 	
+	// set specific piece at the position
 	public void setSpecPiece(int xPos, int yPos, Piece piece)
 	{
 		if (xPos < 6 && xPos >= 0 && yPos < 6 && yPos >= 0)
@@ -129,6 +149,7 @@ public class Board
 		}
 	}	
 
+	// get square at the position
 	public Square getSquare(int xPos, int yPos)
 	{
 		if (xPos < 6 && xPos >= 0 && yPos < 6 && yPos >= 0)
@@ -140,6 +161,7 @@ public class Board
 		return null;
 	}
 	
+	// set square at the position
 	public void setSquare(int xPos, int yPos, Square square)
 	{
 		if (xPos < 6 && xPos >= 0 && yPos < 6 && yPos >= 0)
@@ -149,6 +171,7 @@ public class Board
 		}
 	}
 	
+	// get square at the position
 	public boolean checkOccupied(int xPos, int yPos)
 	{
 		if (xPos < 6 && xPos >= 0 && yPos < 6 && yPos >= 0)
@@ -163,6 +186,7 @@ public class Board
 		return false;
 	}
 	
+	//check the specific piece at the positions team
 	public String checkPieceTeam(int xPos, int yPos) 
 	{
 		if (xPos < 6 && xPos >= 0 && yPos < 6 && yPos >= 0)
@@ -182,11 +206,13 @@ public class Board
 		return null;
 	}
 	
+	// update score for players
 	public void updateScore () 
 	{
 		int white = 0;
 		int black = 0;
 		
+		// if piece is dead add 5 points to enemy
 		for (int i = 0; i < pieces.length; i++)
 		{
 			if (pieces[i].getTeam().equals("player1") && pieces[i].getAliveStatus() == false)
@@ -199,6 +225,7 @@ public class Board
 			}
 		}
 		
+		// setting the score
 		players[0].setScore(white);
 		players[1].setScore(black);
 	}
@@ -231,10 +258,12 @@ public class Board
 		return players[currentPlayer];
 	}
 	
+	// checks if game is over
 	public boolean checkGameOver()
 	{
 		boolean gameOver = false;
 		
+		// check if player has the max points
 		for (int i = 0; i < players.length; i++)
 		{
 			if (players[i].getScore() == 30)
@@ -243,6 +272,7 @@ public class Board
 			}
 		}
 		
+		//check if no more turns left
 		if (numMoves == 0)
 		{
 			gameOver = true;
@@ -251,6 +281,7 @@ public class Board
 		return gameOver;
 	}
 	
+	// add a player to the game
 	public boolean addPlayer(Player player)
 	{
 		boolean added = false;
@@ -268,6 +299,7 @@ public class Board
 		return added;
 	}
 	
+	// updates all the pieces possible moves
 	public void updatePieces()
 	{
 		for(int i = 0; i < pieces.length; i++)
@@ -282,10 +314,12 @@ public class Board
 		}
 	}
 	
+	// moving operations
 	public void move(int xPos, int yPos, int tarXPos, int tarYPos)
 	{
 		updatePieces();
 		
+		// getting the piece that we selected
 		for (int i = 0; i < pieces.length; i++)
 		{
 			if (pieces[i].getPosition() != null)
@@ -293,6 +327,7 @@ public class Board
 				if (pieces[i].getPosition().getXAxis() == xPos
 						&& pieces[i].getPosition().getYAxis() == yPos)
 				{
+					//checking if placed at a possible attack
 					Square[] posAttack = pieces[i].getPossibleAttacks();
 					
 					
@@ -302,6 +337,8 @@ public class Board
 						{
 							int attackXAxis = posAttack[j].getXAxis();
 							int attackYAxis = posAttack[j].getYAxis();
+							
+							//comparing the ints of the attack and the wanted position
 							if (Integer.compare(attackXAxis, tarXPos) == 0
 									&& Integer.compare(attackYAxis, tarYPos) == 0)
 							{
@@ -313,6 +350,7 @@ public class Board
 										if (pieces[k].getPosition().getXAxis() == tarXPos
 												&& pieces[k].getPosition().getYAxis() == tarYPos)
 										{
+											//killing the piece at the attack
 											pieces[k].killPiece();
 											pieces[k].setPosition(null);
 											updateScore();
@@ -329,11 +367,13 @@ public class Board
 						}
 					}
 					
+					//updating the position, of the piece moved
 					grid[xPos][yPos].setOccupied(false);
 					grid[tarXPos][tarYPos].setOccupied(true);
 					
 					pieces[i].setPosition(grid[tarXPos][tarYPos]);
 					
+					// updating current player
 					if (currentPlayer == 1)
 					{
 						currentPlayer--;
@@ -370,6 +410,7 @@ public class Board
 		endObservers.add(endObserver);
 	}
 	
+	// updating the board visuals after turn
 	public void updateBoard()
 	{
 		updatePieces();
@@ -379,6 +420,7 @@ public class Board
 		}
 	}
 	
+	// after selected a tile
 	public void pieceSelected(int xPos, int yPos)
 	{
 		updatePieces();
@@ -388,6 +430,7 @@ public class Board
 		}
 	}
 	
+	// after deselected a tile
 	public void deselected()
 	{
 		for (BoardObserver boardObserver : boardObservers)
@@ -396,6 +439,7 @@ public class Board
 		}
 	}
 	
+	// end the game
 	public void endGame()
 	{
 		for (EndObserver endObserver : endObservers)

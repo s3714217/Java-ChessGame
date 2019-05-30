@@ -12,7 +12,8 @@ import oo.Player;
 
 public class ChessGUI extends JFrame implements EndObserver
 {
-
+	
+	// the screen size
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private int screenXAxis = (int) screenSize.getWidth();
 	
@@ -23,6 +24,7 @@ public class ChessGUI extends JFrame implements EndObserver
 	{
 		super("ChessGUI");
 		
+		//setting layout and size
 		setLayout(new BorderLayout());
 		setLocationRelativeTo(null);
 		setSize(screenXAxis/2, screenXAxis/2);
@@ -30,8 +32,10 @@ public class ChessGUI extends JFrame implements EndObserver
 		setVisible(true);
 		setResizable(false);
 		
+		// adding tthis to end observer
 		board.addEndObserver(this);
 		
+		// adding the status bar and center panel
 		statusBar = new StatusBar(board);
 		
 		board.addMoveObserver(statusBar);
@@ -41,6 +45,7 @@ public class ChessGUI extends JFrame implements EndObserver
 		add(statusBar, BorderLayout.SOUTH);
 	}
 
+	// if game has ended
 	@Override
 	public void endGame(Board board)
 	{
@@ -48,6 +53,7 @@ public class ChessGUI extends JFrame implements EndObserver
 		Player p1 = board.getPlayer1();
 		Player p2 = board.getPlayer2();
 		
+		// check who won the game
 		if(p1.getScore() == p2.getScore())
 		{
 			JOptionPane.showMessageDialog(null, "The game ended in a draw.");
@@ -61,6 +67,7 @@ public class ChessGUI extends JFrame implements EndObserver
 			JOptionPane.showMessageDialog(null, p2.getName() + " won the game.");
 		}
 		
+		// close program
 		System.exit(0);
 	}
 }

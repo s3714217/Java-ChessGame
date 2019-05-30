@@ -21,6 +21,7 @@ public class Knight extends Piece
 		super.checkPosition(this.getPosition().getXAxis() - 2, this.getPosition().getYAxis()  - 1, board);
 		super.checkPosition(this.getPosition().getXAxis() - 2, this.getPosition().getYAxis() + 1, board);
 		
+		//since the Knight can jump over pieces there is no checkBlockedPath method
 		super.checkPosition(this.getPosition().getXAxis() - 1, this.getPosition().getYAxis() + 2, board);
 		super.checkPosition(this.getPosition().getXAxis() + 1, this.getPosition().getYAxis() + 2, board);
 		super.checkPosition(this.getPosition().getXAxis() - 1, this.getPosition().getYAxis() - 2, board);

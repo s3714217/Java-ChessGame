@@ -1,8 +1,11 @@
 package oo;
 
 public class Player {
-
+	
+	//player score
 	private int score;
+	
+	// name and password
 	private String name;
 	private String pass;
 
@@ -32,11 +35,13 @@ public class Player {
 		this.score = score;
 	}
 	
+	//converts player info to a string
 	public String toString() {
 		String mess = name + "." + pass + "." + score;
 		return mess;
 	}
 	
+	//check if a player is the same
 	public boolean equal(String name, String pass)
 	{
 		
